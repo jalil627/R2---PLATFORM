@@ -1,0 +1,75 @@
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/product/%..." tree={[...]} params={{slug:"%D9%..."}} cacheNode={{rsc:{...}, ...}} ...>
+            <SegmentViewNode type="page" pagePath="product/[s...">
+              <SegmentTrieNode>
+              <ProductPage>
+                <div className="min-h-scre...">
+                  <HomeHeader>
+                  <div className="mx-auto ma...">
+                    <div>
+                    <div className="grid grid-...">
+                      <div>
+                      <div className="lg:col-span-1">
+                        <div className="sticky top...">
+                          <SharePanel productId="cmu0cdd1n0..." slug="كتاب-المهن..." title="كتاب المهندس" ...>
+                            <div className="bg-white r...">
+                              <h3>
+                              <div className="grid grid-...">
+                                <button>
+                                <a
++                                 href="https://api.whatsapp.com/send?text=%D8%B4%D9%88%D9%81%20%D9%87%D8%A7%D8%AF%20%..."
+-                                 href="https://api.whatsapp.com/send?text=%D8%B4%D9%88%D9%81%20%D9%87%D8%A7%D8%AF%20%..."
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-eme..."
+                                >
+                                <a
++                                 href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fp..."
+-                                 href="https://www.facebook.com/sharer/sharer.php?u="
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-[va..."
+                                >
+                              ...
+                          ...
+            ...
+          ...
+ 
+[31m[auth][error][0m CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_@auth_core_0gltlle._.js:1182:30)
+    at async AuthInternal (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_@auth_core_0gltlle._.js:2511:24)
+    at async Auth (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_@auth_core_0gltlle._.js:350:34)
+    at async AppRouteRouteModule.do (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:42793)
+    at async AppRouteRouteModule.handle (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:50547)
+    at async responseGenerator (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_next_1e9htnb._.js:5328:30)
+    at async AppRouteRouteModule.handleResponse (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:250435)
+    at async handleResponse (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_next_1e9htnb._.js:5400:32)
+    at async Module.handler (C:\Users\fahad\Documents\Default Project\digital-market\.next\dev\server\chunks\node_modules_next_1e9htnb._.js:5520:9)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\base-server.js:1537:9)
+    at async DevServer.renderPageComponent (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\base-server.js:1589:24)
+    at async DevServer.renderToResponseImpl (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\base-server.js:1639:32)
+    at async DevServer.pipeImpl (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\base-server.js:1088:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\next-server.js:338:17)
+    at async DevServer.handleRequestImpl (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\base-server.js:979:17)
+    at async C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\dev\next-dev-server.js:426:20
+    at async Span.traceAsyncFn (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\trace\trace.js:164:20)
+    at async DevServer.handleRequest (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\dev\next-dev-server.js:422:24)
+    at async invokeRender (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\lib\router-server.js:306:21)
+    at async handleRequest (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\lib\router-server.js:508:24)
+    at async requestHandlerImpl (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\lib\router-server.js:565:13)
+    at async Server.requestListener (C:\Users\fahad\Documents\Default Project\digital-market\node_modules\next\dist\server\lib\start-server.js:225:13)
